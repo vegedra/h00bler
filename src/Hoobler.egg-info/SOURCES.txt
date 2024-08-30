@@ -1,0 +1,8 @@
+README.md
+setup.py
+src/Hoobler.egg-info/PKG-INFO
+src/Hoobler.egg-info/SOURCES.txt
+src/Hoobler.egg-info/dependency_links.txt
+src/Hoobler.egg-info/entry_points.txt
+src/Hoobler.egg-info/requires.txt
+src/Hoobler.egg-info/top_level.txt

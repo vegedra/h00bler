@@ -1,0 +1,8 @@
+pyjokes==0.6.0
+requests==2.32.3
+
+[:platform_system != "Windows"]
+curses
+
+[:platform_system == "Windows"]
+windows-curses
