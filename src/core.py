@@ -57,7 +57,7 @@ def add_or_update_question(knowledge_base, user_question, new_answer):
     knowledge_base["questions"].append({"question": [user_question], "answer": [new_answer]})
 
 # Remove entrada do banco de dados
-def remove_question_from_knowledge_base(question: str, knowledge_base: dict):
+def remove_question_from_knowledge_base(question, knowledge_base):
     for i, q in enumerate(knowledge_base['questions']):
         if q['question'] == question:
             del knowledge_base['questions'][i]

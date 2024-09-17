@@ -11,9 +11,11 @@ import random
 
 """ TODO: 
 Abrir programas;
-Responder perguntas (wikipedia); 
+Responder perguntas; 
 Lidar com erro de localizacao invalida do wttr;
-Tentar escolher as respostas baseadas em contexto. """
+Tentar escolher as respostas baseadas em contexto;
+interface 'grafica';
+parser. """
 
 # Variáveis globais para armazenar configurações
 idioma = 'en'  # Valor padrão
