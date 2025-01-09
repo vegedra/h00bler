@@ -20,7 +20,7 @@ import main
 
 # Receber informações do clima.
 def get_weather():
-    city_name = input("\nHoobler: Enter the name of the city or press ENTER to use current location: ")
+    city_name = input("Hoobler: Enter the name of the city or press ENTER to use current location: ")
 
     # Usa o sistema WTTR para ver o clima - ?T - Remove cor e faz arte ASCII funcionar e o 0 para mostrar apenas
     # o clima atual
@@ -79,16 +79,17 @@ def roll_dice():
         return None
     
     dice = random.randint(1, faces)
-    return "The dice rolled a... ", dice
+    return f"The dice rolled a... {dice}"
 
 def tell_definition():
+    print("Hoobler: Type the word you want to know the definition.")
     word = input("> ")
     synsets = wordnet.synsets(word)
 
     if synsets:
         print(f"Hoobler: Definitions for '{word}':")
         for synset in synsets:
-            return f" - {synset.definition()}"
+            return f"{synset.definition()}"
     else:
         return f"No definitions found for '{word}'."
         
@@ -99,7 +100,7 @@ Here are some things I can do:
     1. I can tell you the weather (type 'weather');
     2. I can tell you a tech joke (type 'joke');
     3. I can tell you the time (type 'time');
-    4. I can tell the definition of a word and what it is (type 'what is');
+    4. I can tell the definition of a word (type 'what is');
     5. I can be a calculator (type 'calc');
     6. I can roll you a dice for a random number (type 'dice');
     7. To clear the screen type 'cls'.

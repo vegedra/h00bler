@@ -1,8 +1,10 @@
 from datetime import datetime
 from src.calc import Calculator
+from nltk.corpus import wordnet
+import nltk
+import src.core
 import os
 import sys
-import src.config as cfg
 import random
 import requests
 import pyjokes
@@ -18,7 +20,7 @@ import main
 
 # Receber informações do clima.
 def get_weather():
-    city_name = input("\nHoobler: Enter the name of the city or press ENTER to use current location: ")
+    city_name = input("Hoobler: Enter the name of the city or press ENTER to use current location: ")
 
     # Usa o sistema WTTR para ver o clima - ?T - Remove cor e faz arte ASCII funcionar e o 0 para mostrar apenas
     # o clima atual
@@ -52,35 +54,60 @@ def tell_time():
 # Calculadora simples
 def calc():
     calcular = Calculator()
-    line = input("Hoobler: Digite a conta: ")
+    line = input("Hoobler: Type math account\n> ")
     
     try:
         print("Hoobler:", calcular.parse(line))
     except SyntaxError as e:
         print(f'Hoobler: {e.msg}')
 
-    ch = input("Hoobler: Quer usar a calculadora novamente? s/n\n> ")
+    ch = input("Hoobler: Do you want to use the calculator again? y/n\n> ")
     if ch.lower() in ('s', 'y'):
         conta = 0
         return calc()
     else: 
         return "Ok."
+        
+def roll_dice():
+    faces = input("Hoobler: How many faces?\n> ")
+    try:
+        faces = int(faces.strip())
+        if faces < 1:
+            raise ValueError("Number of faces must be at least 1.")
+    except ValueError as e:
+        print(f"Invalid input: {e}")
+        return None
+    
+    dice = random.randint(1, faces)
+    return f"The dice rolled a... {dice}"
 
-# Ir pro setup novamente:
-def config():
-    ch = input("Hoobler: Deseja usar o setup novamente? s/n\n")
-    if ch.lower() in ('s', 'y'):
-        cfg.values['setup'] = 1
-        return main.setup()
-    else: 
-        return "Ok."
-
-# Perguntar definição de palavras
 def tell_definition():
-    # Usa requests e algum site
-    return "Indev."
+    print("Hoobler: Type the word you want to know the definition.")
+    word = input("> ")
+    synsets = wordnet.synsets(word)
+
+    if synsets:
+        print(f"Hoobler: Definitions for '{word}':")
+        for synset in synsets:
+            return f"{synset.definition()}"
+    else:
+        return f"No definitions found for '{word}'."
         
 # Manual
 def help():
-    # Printa um textao explicando o app ou abre um arquivo .txt?
-    return "Here is what you can do with me:"
+    return """I'm a personal assistant that can help you with your tasks. 
+Here are some things I can do:
+    1. I can tell you the weather (type 'weather');
+    2. I can tell you a tech joke (type 'joke');
+    3. I can tell you the time (type 'time');
+    4. I can tell the definition of a word (type 'what is');
+    5. I can be a calculator (type 'calc');
+    6. I can roll you a dice for a random number (type 'dice');
+    7. To clear the screen type 'cls'.
+    
+These are some of the things I can do for you, beside chatting."""
+
+# Limpar tela
+def cls():
+    os.system('cls')
+    return "Cleared!"
